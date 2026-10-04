@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <!-- CEO Dashboard Client Action -->
     <record id="action_ceo_dashboard" model="ir.actions.client">
         <field name="name">Executive Dashboard</field>
         <field name="tag">ceo_dashboard.dashboard</field>
     </record>
 
+    <!-- Executive Dashboard Menu -->
     <menuitem id="menu_ceo_dashboard_root"
               name="Executive Dashboard"
               sequence="1"
               web_icon="ceo_dashboard,static/description/icon.png"
-              groups="base.group_user"/>
+              groups="ceo_dashboard.group_ceo_dashboard_user"/>
 
     <menuitem id="menu_ceo_dashboard_main"
               name="Dashboard"
@@ -17,8 +20,4 @@
               action="action_ceo_dashboard"
               sequence="1"/>
 
-    <!-- Set Executive Dashboard as Default Home Action upon Login for Administrator -->
-    <record id="base.user_admin" model="res.users">
-        <field name="action_id" ref="action_ceo_dashboard"/>
-    </record>
 </odoo>

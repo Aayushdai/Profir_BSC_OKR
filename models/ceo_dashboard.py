@@ -1110,8 +1110,6 @@ class CeoDashboard(models.AbstractModel):
             'overdue_tasks': overdue_tasks,
             'tasks_due_today': tasks_due_today,
             'projects_over_budget': projects_over_budget,
-            'billable_hours': 0.0,
-            'billable_target': 0.0,
             'projects': projects,
             'tickets': [],
         }

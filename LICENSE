@@ -1,2 +1,17 @@
-This module is licensed under the GNU Lesser General Public License v3.0 (LGPL-3).
-Full license text: https://www.gnu.org/licenses/lgpl-3.0.html
+
+### What was removed
+
+The old README incorrectly claimed that the module required and activated:
+
+```text
+account
+sale_management
+crm
+stock
+purchase
+hr
+hr_holidays
+hr_attendance
+hr_recruitment
+project
+helpdesk

@@ -1,39 +1,70 @@
-# Executive CEO Dashboard (Odoo 19)
+# Executive CEO Dashboard (Odoo 20)
 
-A single-screen executive dashboard covering Finance, Sales & CRM, Inventory,
-HR, and Projects & Helpdesk, with global date filters (Today / Week / Month /
-Year / Custom range) and year-over-year comparisons.
+A centralized executive dashboard for visualizing operational performance from Odoo.
+
+The dashboard provides a consolidated view of Finance & Accounting, Sales & CRM,
+Inventory & Operations, and Project Operations, with global date filtering and
+year-over-year comparison.
+
+The module acts as a visualization layer over existing Odoo operational data.
+Strategic objectives, OKRs, KPI definitions, KPI targets, performance calculations,
+and strategic analysis are handled separately by the Strategic Performance
+Management module.
 
 ## Dependencies
-`base`, `web`, `account`, `sale_management`, `crm`, `stock`, `purchase`,
-`hr`, `hr_holidays`, `hr_attendance`, `hr_recruitment`, `project`, `helpdesk`
 
-All of these must be installed — this build uses them as **hard
-dependencies**, so installing this module will also install/activate all of
-the above apps.
+`base`, `web`
+
+The dashboard keeps these dependencies minimal and dynamically uses operational
+Odoo models when the corresponding applications are installed.
 
 ## Install
-1. Copy the `ceo_dashboard` folder into your Odoo `addons` path.
-2. Update Apps List, then install **Executive CEO Dashboard**.
-3. Go to **Settings > Executive Dashboard** to set your Monthly Revenue
-   Target, Monthly Billable Hours Target, and the "late check-in" cutoff time.
-4. Open the **Executive Dashboard** app from the main menu.
 
-## Notes / assumptions
-- Figures use the `account_type` field on Chart of Accounts (income /
-  income_other / expense / expense_direct_cost / expense_depreciation /
-  asset_cash) to classify Revenue, COGS, Expenses and Cash — standard on any
-  Odoo Chart of Accounts.
-- Gross Profit = Revenue − COGS (accounts of type `expense_direct_cost`).
-- DSO = (Accounts Receivable ÷ Period Revenue) × Days in the selected period.
-- Stock Turnover = (COGS ÷ Current Inventory Value), annualized to the
-  selected period length.
-- "Late clock-in" and "Projects Over Budget" use simple, configurable
-  heuristics (check-in time cutoff; planned vs. effective hours) since Odoo
-  has no single canonical definition for either — adjust in
-  `models/ceo_dashboard.py` if your business defines these differently.
-- Every KPI section fails independently (try/except) so a missing field on
-  one section never breaks the rest of the dashboard.
+1. Copy the `ceo_dashboard` folder into your Odoo addons path.
+2. Update the Apps List.
+3. Install **Executive CEO Dashboard**.
+4. Open **Executive Dashboard** from the main menu.
 
-## License
-LGPL-3
+## Main Features
+
+- Executive Summary
+- Finance & Accounting metrics
+- Sales & CRM metrics
+- Inventory & Operations metrics
+- Project operational metrics
+- Today / Week / Month / Quarter / Year date presets
+- Custom date range filtering
+- Year-over-year comparison
+- Currency-aware financial formatting
+- Direct drill-down to relevant Odoo records
+- Refresh of operational data from Odoo
+
+## Notes / Assumptions
+
+- Financial figures are retrieved from the available Odoo accounting data.
+- Revenue, expenses, profit, cash, receivables, payables, and overdue invoice
+  metrics are presented from the corresponding operational records.
+- Sales and CRM information is retrieved from available sales orders and CRM
+  opportunities.
+- Inventory information is retrieved from available stock and purchasing data.
+- Project information is retrieved from available project and task data.
+- Operational sections are handled independently so that unavailable optional
+  Odoo models do not prevent the dashboard from loading the remaining sections.
+- Strategic performance logic such as BSC perspectives, strategic objectives,
+  OKRs, Key Results, KPI targets, KPI progress, and performance-gap analysis is
+  outside the scope of this dashboard module.
+
+## Architecture
+
+```text
+Odoo Operational Modules
+        |
+        v
+Operational Data
+        |
+        v
+CEO Dashboard
+(Visualization Layer)
+        |
+        v
+Executive Users
